@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Точка Опоры</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="fade-in">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Логотип" class="logo-img">
+            <span class="logo-text">ТОЧКА ОПОРЫ</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-left fade-in">
+                <h1>Твоя точка<br>заземления</h1>
+                <div class="hero-desc">
+                    <p>Бережная поддержка в сложные моменты.<br>Помощник при тревоге, который не зависит от сети.</p>
+                    <p>Приложение работает автономно. Мы не собираем<br>личные данные и не отправляем их в сеть — все<br>хранится строго на вашем устройстве.</p>
+                </div>
+                <button class="btn-start" id="openAuthBtn" style="cursor: pointer;">Начать</button>
+            </div>
+
+            <div class="hero-right fade-in">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+                <div class="circle circle-4"></div>
+                
+                <p class="float-text text-top-right">Подготовка в покое,<br>спасение в кризис</p>
+                <h2 class="float-title">ТОЧКА ОПОРЫ</h2>
+                <p class="float-text text-mid-left">Мгновенный запуск<br>пошагового алгоритма</p>
+                <p class="float-text text-bottom-right">Защита от случайного закрытия<br>и отвлекающих элементов</p>
+            </div>
+        </section>
+
+        <section id="concept" class="concept">
+            <h2 class="concept-main-title fade-in">Надежный цифровой инструмент для тех,<br>кто сталкивается с сильными эмоциональными перегрузками</h2>
+            
+            <div class="concept-container">
+                <div class="concept-left fade-in">
+                    <p>Идея «Пульта управления состоянием» <br>— интерфейса, который подстраивается под вас <br>и работает безотказно,<br>когда земля уходит из-под ног</p>
+                </div>
+                
+                <div class="concept-right fade-in">
+                    <p class="text-block">В момент острой паники<br>человек теряет способность логически мыслить.<br>Наше приложение разделено <br> на два четких сценария:</p>
+                    
+                    <p class="text-block"><strong>В спокойном состоянии —</strong><br>вы создаете личную «Аптечку»,<br>настраиваете сценарии под свои триггеры<br>(«Паника», «Ссора», «Тревога»)<br>и собираете в них<br>эффективные для себя шаги помощи</p>
+                    
+                    <p class="text-block block-shifted"><strong>В острый момент —</strong><br>вы нажимаете одну кнопку.<br>Перед вами появляются окошки<br>ваших заготовленных ситуаций.<br>Один тап —<br>и запускается пошаговый протокол спасения</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="connect">
+        <div class="footer-content fade-in">
+            <nav class="footer-nav">
+                <a href="#top">Главная</a>
+                <a href="#concept">Концепция</a>
+                <a href="#connect">Связаться</a>
+            </nav>
+            <div class="socials">
+                <a href="https://vk.com" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
+                    <img src="images/vk.png" alt="ВКонтакте">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <img src="images/inst.png" alt="Instagram">
+                </a> 
+                <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="images/tg.png" alt="Telegram">
+                </a> 
+            </div>
+            <p class="copyright">© 2026</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="bottom-sheet" id="authModal">
+            <div class="modal-drag-handle"></div>
+            
+            <div id="loginView" class="auth-view">
+                <h3>Вход</h3>
+                <input type="text" id="loginUser" placeholder="Логин (или email)" autocomplete="off">
+                <input type="password" id="loginPass" placeholder="Пароль">
+                <button id="btnLogin" class="btn-submit">Войти</button>
+                <p class="switch-auth">
+                    <a href="#" id="toRegister">Я здесь впервые</a>
+                </p>
+            </div>
+
+            <div id="registerView" class="auth-view hidden">
+                <h3>Регистрация</h3>
+                <input type="text" id="regUser" placeholder="Придумайте логин" autocomplete="off">
+                <input type="password" id="regPass" placeholder="Придумайте пароль">
+                <p class="privacy-note">Все данные хранятся только на вашем устройстве</p>
+                <button id="btnRegister" class="btn-submit">Вход в безопасное место</button>
+                <p class="switch-auth">
+                    <a href="#" id="toLogin">У меня уже есть аккаунт</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
