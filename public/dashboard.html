@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Точка опоры</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+        <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FDF4F5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <script src="js/storage.js"></script>
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Логотип" class="logo-img">
+            <span class="logo-text">ТОЧКА ОПОРЫ</span>
+        </div>
+        <div class="user-info" id="userInfo">
+            <span class="greeting" id="greeting"></span>
+            <div class="avatar" id="avatar">?</div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="filter-section">
+            <div class="filter-scroll" id="filterScroll">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="critical">Критические</button>
+                <button class="filter-btn" data-filter="hard">Трудные</button>
+                <button class="filter-btn" data-filter="discomfort">Дискомфорт</button>
+            </div>
+        </div>
+
+        <div class="situations-grid" id="situationsGrid">
+        </div>
+    </main>
+
+    <!-- Плавающая кнопка создания -->
+    <button class="fab" id="fabCreate" aria-label="Создать ситуацию">+</button>
+
+    <!-- Модалка действий для карточки -->
+    <div class="modal-overlay" id="cardMenuOverlay">
+        <div class="bottom-sheet small-sheet" id="cardMenuSheet">
+            <div class="modal-drag-handle"></div>
+            <div class="menu-actions">
+                <button id="editSituationBtn" class="menu-action">
+                    <img src="images/icon-edit.png" class="ui-icon" alt="редактировать">
+                    Редактировать
+                </button>
+                <button id="deleteSituationBtn" class="menu-action danger">
+                    <img src="images/icon-delete.png" class="ui-icon" alt="удалить">
+                    Удалить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/toast.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Точки Опоры активен'))
+                    .catch(err => console.error('Ошибка SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>

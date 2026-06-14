@@ -1,0 +1,25 @@
+{
+  "name": "Точка Опоры",
+  "short_name": "Точка Опоры",
+  "description": "Автономный помощник при тревоге и панических состояниях",
+  "lang": "ru-RU",
+  "theme_color": "#FDF4F5",
+  "background_color": "#FDF4F5",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

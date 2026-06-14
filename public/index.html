@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Точка Опоры</title>
+    <title>Точка опоры</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FDF4F5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <script src="js/storage.js"></script>
+
 </head>
 <body>
 
@@ -106,7 +114,20 @@
             </div>
         </div>
     </div>
+    <!-- Контейнер для всплывающих уведомлений -->
+<div id="toastContainer" class="toast-container"></div>
+
 
     <script src="js/script.js"></script>
+        <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Точки Опоры активен'))
+                    .catch(err => console.error('Ошибка SW:', err));
+            });
+        }
+    </script>
+
 </body>
 </html>

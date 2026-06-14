@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Сеанс помощи — точка опоры</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/session.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FDF4F5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <script src="js/storage.js"></script>
+</head>
+<body>
+
+    <div class="session-container">
+        <!-- Индикатор прогресса -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="step-counter" id="stepCounter">шаг 1 из 1</div>
+
+        <!-- Область контента шага -->
+        <div class="step-content" id="stepContent">
+            <!-- динамически -->
+        </div>
+
+        <!-- Кнопка завершения шага / далее -->
+        <button class="next-btn hidden" id="nextBtn">Далее</button>
+
+        <!-- Экстренный выход (полупрозрачный) -->
+        <button class="emergency-exit" id="emergencyExit">Экстренный выход</button>
+    </div>
+    <script src="js/toast.js"></script>
+
+    <script src="js/session.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Точки Опоры активен'))
+                    .catch(err => console.error('Ошибка SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Точка опоры</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/create-edit.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FDF4F5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <script src="js/storage.js"></script>
+</head>
+<body>
+
+    <header class="editor-header">
+        <button class="back-btn" id="backBtn">← Назад</button>
+        <h2 id="formTitle">Новая ситуация</h2>
+        <button class="save-btn" id="saveBtn">Сохранить</button>
+    </header>
+
+    <main class="editor-main">
+        <div class="form-group">
+            <label>Название ситуации</label>
+            <input type="text" id="situationTitle" placeholder="Например: Паника в метро" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label>Категория</label>
+            <div class="category-selector">
+                <button type="button" class="cat-btn" data-cat="critical">Критическая</button>
+                <button type="button" class="cat-btn" data-cat="hard">Трудная</button>
+                <button type="button" class="cat-btn" data-cat="discomfort">Дискомфорт</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Шаги помощи (в порядке выполнения)</label>
+            <div id="stepsList" class="steps-list">
+                <!-- Список шагов будет добавляться сюда -->
+            </div>
+            <button id="addStepBtn" class="add-step-btn">+ Добавить шаг</button>
+        </div>
+        
+            <div class="form-group">
+                <label>Фоновый звук сеанса</label>
+                <select id="situationSound" class="dark-green-select">
+                    <option value="">Без звука</option>
+                    <option value="media/rain.mp3">Дождь</option>
+                    <option value="media/forest.mp3">Лес</option>
+                    <option value="media/brown.mp3">Коричневый шум</option>
+                    <option value="media/white.mp3">Белый шум</option>
+                    <option value="custom">Загрузить свой...</option>
+                </select>
+                <input type="file" id="customSoundUpload" accept="audio/mp3, audio/wav" class="hidden" style="margin-top: 10px;">
+                <button id="previewSoundBtn" type="button" class="btn-secondary hidden" style="margin-top: 10px;">▶ Слушать</button>
+            </div>
+    </main>
+
+    <!-- Модалка выбора типа шага -->
+    <div class="modal-overlay" id="stepTypeOverlay">
+        <div class="bottom-sheet" id="stepTypeSheet">
+            <div class="modal-drag-handle"></div>
+            <h3>Выберите тип шага</h3>
+            <div class="step-types-grid">
+    <button class="step-type" data-type="grounding">
+        <img src="images/icon-grounding.png" class="ui-icon" alt="заземление">
+        Заземление 5-4-3-2-1
+    </button>
+    <button class="step-type" data-type="breathing">
+        <img src="images/icon-breathing.png" class="ui-icon" alt="дыхание">
+        Дыхание
+    </button>
+    <button class="step-type" data-type="anchor">
+        <img src="images/icon-anchor.png" class="ui-icon" alt="фраза-якорь">
+        Фраза-якорь
+    </button>
+    <button class="step-type" data-type="action">
+        <img src="images/icon-action.png" class="ui-icon" alt="действие">
+        Действие в реальности
+    </button>
+    <button class="step-type" data-type="simple">
+        <img src="images/icon-simple.png" class="ui-icon" alt="простое задание">
+        Простое задание
+    </button>
+</div>
+            <button class="cancel-btn" id="cancelStepType">Отмена</button>
+        </div>
+    </div>
+
+    
+
+    <!-- Модалка для редактирования конкретного шага -->
+    <div class="modal-overlay" id="stepEditOverlay">
+    <div class="bottom-sheet" id="stepEditSheet">
+        <div class="modal-drag-handle"></div>
+        <h3 id="stepEditTitle">Редактировать шаг</h3>
+        <div id="stepEditForm" class="step-edit-form"></div>
+        <div class="edit-actions">
+            <button id="saveStepBtn" class="btn-submit">Сохранить</button>
+            <button id="cancelStepEdit" class="btn-secondary">Отмена</button>
+        </div>
+    </div>
+</div>
+    <script src="js/toast.js"></script>
+
+    <script src="js/create-edit.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Точки Опоры активен'))
+                    .catch(err => console.error('Ошибка SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>

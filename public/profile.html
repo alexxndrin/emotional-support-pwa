@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль — точка опоры</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FDF4F5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <script src="js/storage.js"></script>
+</head>
+<body>
+
+    <header class="profile-header">
+        <button class="back-btn" id="backBtn">← Назад</button>
+        <h1>Профиль</h1>
+    </header>
+
+    <main class="profile-main">
+        <div class="avatar-section">
+            <!-- Интерактивная зона аватара (круг) -->
+            <div class="avatar-large" id="avatarLarge" title="Нажмите, чтобы загрузить фото"></div>
+            <!-- Скрытый инпут для выбора фотографии -->
+            <input type="file" id="avatarUpload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+            
+            <div class="username-edit-container">
+                <input type="text" id="usernameInput" class="username-input" readonly>
+                <button id="editNameBtn" class="edit-name-btn" aria-label="Редактировать имя">✎</button>
+            </div>
+        </div>
+
+        <div class="menu-list">
+            <div class="menu-item" id="aboutAppBtn">
+                <span>О приложении</span>
+                <span class="menu-arrow">›</span>
+            </div>
+            <div class="menu-item" id="emergencyContactsBtn">
+                <span>Экстренные контакты</span>
+                <span class="menu-arrow">›</span>
+            </div>
+            <div class="menu-item" id="exportImportBtn">
+                <span>Экспорт / Импорт данных</span>
+                <span class="menu-arrow">›</span>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">Выйти</button>
+    </main>
+
+    <!-- Модалка: О приложении -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="bottom-sheet">
+            <div class="modal-drag-handle"></div>
+            <h3>О приложении</h3>
+            <div class="modal-content">
+                <p><strong>Точка Опоры</strong> — автономный помощник при тревоге и панических состояниях.</p>
+                <p>Все данные хранятся только на вашем устройстве. Приложение не собирает и не передаёт личную информацию.</p>
+                <p style="margin-bottom: 25px;">Версия 1.0</p>
+                <button class="close-modal-btn">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка: Экстренные контакты -->
+    <div class="modal-overlay" id="contactsModal">
+        <div class="bottom-sheet small-sheet">
+            <div class="modal-drag-handle"></div>
+            <h3>Экстренные контакты</h3>
+            <div id="contactsList" class="contacts-list"></div>
+            <div class="add-contact">
+                <input type="text" id="newContactName" placeholder="Имя контакта">
+                <input type="tel" id="newContactPhone" placeholder="Номер телефона">
+                <button id="addContactBtn" class="btn-submit">Добавить</button>
+            </div>
+            <button class="close-modal-btn" id="closeContactsBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модалка: Экспорт/Импорт -->
+    <div class="modal-overlay" id="exportModal">
+        <div class="bottom-sheet small-sheet">
+            <div class="modal-drag-handle"></div>
+            <h3>Экспорт / Импорт</h3>
+            <div class="export-buttons">
+                <button id="exportDataBtn" class="btn-submit">Экспорт данных в файл</button>
+                <label class="import-label" for="importFile">Импорт из файла</label>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+                <button id="importConfirmBtn" class="btn-secondary" style="display: none;">Подтвердить импорт</button>
+            </div>
+            <p class="note">Импорт заменит все ваши текущие данные (ситуации и контакты).</p>
+            <button class="close-modal-btn">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/profile.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Точки Опоры активен'))
+                    .catch(err => console.error('Ошибка SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
