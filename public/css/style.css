@@ -66,9 +66,6 @@ header {
 .logo-img {
     width: 45px;
     height: 45px;
-    /* border-radius: 50%;
-    border: 1px solid var(--accent-color);
-    object-fit: cover; */
 }
 
 .logo-text {
@@ -215,7 +212,6 @@ header {
     background-image: url('../images/index2.png');
     background-size: cover;
     background-position: center;
-    /* opacity: 0.6; */
     z-index: -1;
 }
 
@@ -256,10 +252,6 @@ header {
     font-weight: 600;
 }
 
-/* .block-shifted {
-    margin-right: -40px; 
-    margin-top: 20px;
-} */
 
 /* подвал */
 footer {
@@ -473,4 +465,112 @@ footer::after {
     color: #777777;
     text-align: center;
     margin-top: -5px;
+}
+/* Контейнер в правом нижнем углу */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/*  стили уведомления (прямоугольные плашки) */
+.toast {
+    min-width: 250px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background: #333333;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+/* Анимация плавного взлета при показе */
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.error {
+    background: #ff4d4f; /* Красный для ошибок */
+}
+
+.toast.success {
+    background: #52c41a; /* Зеленый для успеха */
+}
+
+.toast.info {
+    background: #1890ff; /* Синий для инфо */
+}
+
+.toast.warning {
+    background: #ff9900; /* Оранжевый для предупреждений */
+}
+
+
+
+/* Для модалок с маленьким sheet */
+.small-sheet {
+    max-width: 400px;
+    padding: 20px 20px 30px;
+}
+
+/* Анимации для всех */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* стили для кнопок */
+button {
+    font-family: var(--font-body);
+}
+
+.empty-steps {
+    text-align: center;
+    padding: 30px;
+    color: #aaa;
+    font-style: italic;
+}
+
+.ui-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    object-fit: contain;
+}
+
+/* Для тёмных тем - инвертируем цвет иконок */
+.ui-icon.invert {
+    filter: invert(1);
+}
+
+.ui-icon.small {
+    width: 16px;
+    height: 16px;
+}
+
+.ui-icon.large {
+    width: 24px;
+    height: 24px;
+}
+
+button:hover .ui-icon {
+    transform: scale(1.05);
+    transition: transform 0.2s;
 }

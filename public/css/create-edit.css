@@ -1,0 +1,395 @@
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.back-btn, .save-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 30px;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.save-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+.editor-main {
+    padding: 30px 5% 80px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-heading);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+#situationTitle {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.category-selector {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cat-btn {
+    padding: 8px 20px;
+    border-radius: 40px;
+    background: #f0f0f0;
+    border: none;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cat-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.steps-list {
+    background: #f9f9f9;
+    border-radius: 24px;
+    padding: 15px;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+.step-item {
+    background: white;
+    border-radius: 16px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+.step-info {
+    flex: 1;
+}
+
+.step-type-name {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.step-preview {
+    font-size: 0.9rem;
+    color: #555;
+    word-break: break-word;
+}
+
+.step-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.step-actions button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+
+.step-actions button:hover {
+    background: #f0f0f0;
+}
+
+.add-step-btn {
+    background: transparent;
+    border: 1px dashed var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px;
+    border-radius: 40px;
+    width: 100%;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-step-btn:hover {
+    background: rgba(76, 202, 226, 0.1);
+}
+
+/* Модалка выбора типа */
+.step-types-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.step-type {
+    background: #f5f5f5;
+    border: none;
+    padding: 14px;
+    border-radius: 40px;
+    text-align: left;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.step-type:hover {
+    background: #e0e0e0;
+}
+
+.cancel-btn {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 40px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Форма редактирования шага */
+.step-edit-form {
+    margin: 20px 0;
+}
+
+.step-edit-form input, 
+.step-edit-form select,
+.step-edit-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    font-family: var(--font-body);
+}
+
+.step-edit-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary {
+    background: #eee;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    flex: 1;
+    cursor: pointer;
+}
+
+/*  Блок выбора фонового звука  */
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-heading);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.dark-green-select {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234CCAE2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 18px;
+}
+
+.dark-green-select:hover {
+    border-color: var(--accent-color);
+    background-color: #ffffff;
+}
+
+.dark-green-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(76, 202, 226, 0.1);
+}
+
+/* Скрытый класс */
+.hidden {
+    display: none !important;
+}
+
+/* Кнопка предпрослушивания */
+#previewSoundBtn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+}
+
+#previewSoundBtn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+#previewSoundBtn:active {
+    transform: translateY(0);
+}
+
+/* Стили для выбора файла */
+#customSoundUpload {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 16px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#customSoundUpload:hover {
+    border-color: var(--accent-color);
+    background-color: #ffffff;
+}
+
+/* Адаптив для селекта */
+@media (max-width: 600px) {
+    .dark-green-select {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+}
+/* Стили для гайда внутри модалки редактирования шага */
+.step-guide {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.step-guide h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.step-desc {
+    font-size: 0.85rem;
+    color: #6c757d;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/* Дополнительные стили для форм редактирования */
+#stepEditForm label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+#stepEditForm textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid #dee2e6;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+#stepEditForm textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(76, 202, 226, 0.1);
+}
+
+#stepEditForm select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid #dee2e6;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    cursor: pointer;
+    background-color: white;
+}
+
+#stepEditForm select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+#stepEditForm p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    padding: 10px 0;
+}
+
