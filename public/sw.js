@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tochka-opory-v4';
+const CACHE_NAME = 'tochka-opory-v5';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -55,10 +55,12 @@ self.addEventListener('install', (event) => {
                 await cache.addAll(ASSETS_TO_CACHE);
             } catch (error) {
                 console.error('Cache addAll error:', error);
-                // Добавляем по одному файлу, если addAll не сработал
                 for (const url of ASSETS_TO_CACHE) {
                     try {
-                        await cache.add(url);
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            await cache.put(url, response);
+                        }
                     } catch (e) {
                         console.error('Failed to cache:', url, e);
                     }
@@ -71,23 +73,27 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cache) => {
-                    if (cache !== CACHE_NAME) {
-                        return caches.delete(cache);
-                    }
-                })
-            );
-        })
+        Promise.all([
+            caches.keys().then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((cache) => {
+                        if (cache !== CACHE_NAME) {
+                            return caches.delete(cache);
+                        }
+                    })
+                );
+            }),
+            self.clients.claim()
+        ])
     );
-    self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
-    // Пропускаем запросы, которые не GET или к chrome-extension
-    if (event.request.method !== 'GET' || 
-        event.request.url.includes('chrome-extension') ||
+    if (!event.request.url || event.request.method !== 'GET') {
+        return;
+    }
+    
+    if (event.request.url.includes('chrome-extension') ||
         event.request.url.includes('extension')) {
         return;
     }
@@ -98,9 +104,7 @@ self.addEventListener('fetch', (event) => {
                 return cachedResponse;
             }
             
-            // Пробуем загрузить из сети
             return fetch(event.request).then((networkResponse) => {
-                // Кэшируем успешные ответы для будущего оффлайн-режима
                 if (networkResponse && networkResponse.status === 200) {
                     const responseToCache = networkResponse.clone();
                     caches.open(CACHE_NAME).then((cache) => {
@@ -108,15 +112,16 @@ self.addEventListener('fetch', (event) => {
                     });
                 }
                 return networkResponse;
-            }).catch((error) => {
-                console.log('Fetch failed:', error);
-                // Для HTML-страниц возвращаем index.html при оффлайн-режиме
+            }).catch(() => {
                 if (event.request.mode === 'navigate') {
                     return caches.match('/index.html');
                 }
-                return new Response('Офлайн-режим: контент недоступен', {
+                return new Response('Страница недоступна в офлайн-режиме', {
                     status: 503,
-                    statusText: 'Service Unavailable'
+                    statusText: 'Service Unavailable',
+                    headers: new Headers({
+                        'Content-Type': 'text/plain; charset=utf-8'
+                    })
                 });
             });
         })
