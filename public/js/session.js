@@ -101,9 +101,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     enterFullscreen();
 
     function updateProgress() {
-        const percent = (currentStepIndex / totalSteps) * 100;
-        progressFill.style.width = percent + '%';
-        stepCounterSpan.textContent = `шаг ${currentStepIndex + 1} из ${totalSteps}`;
+        const percent = ((currentStepIndex + 1) / totalSteps) * 100;
+        if (progressFill) {
+            progressFill.style.width = percent + '%';
+        }
+        if (stepCounterSpan) {
+            stepCounterSpan.textContent = `шаг ${currentStepIndex + 1} из ${totalSteps}`;
+        }
     }
 
     function completeStep() {

@@ -1,3 +1,5 @@
+// public/js/dashboard.js
+
 document.addEventListener('DOMContentLoaded', () => {
     // Проверка авторизации через Storage
     const currentUser = Storage.getCurrentUser();
@@ -26,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (avatarDiv) {
         const savedPhoto = Storage.getAvatar();
-
         if (savedPhoto) {
             avatarDiv.textContent = '';
             avatarDiv.style.backgroundImage = `url(${savedPhoto})`;
@@ -40,10 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Переход на profile.html
+    // ========== ИСПРАВЛЕНО: Переход на profile.html ==========
     const userInfo = document.querySelector('.user-info');
     if (userInfo) {
-        userInfo.addEventListener('click', () => {
+        userInfo.addEventListener('click', (e) => {
+            e.preventDefault();
             window.location.href = 'profile.html';
         });
     }
@@ -139,12 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.add('visible');
         });
 
-        // Навешиваем обработчики
+        // ========== ИСПРАВЛЕНО: Запуск сессии ==========
         situationsGrid.querySelectorAll('.run-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 const id = btn.dataset.id;
-                window.location.href = `session.html?id=${id}`;
+                if (id) {
+                    window.location.href = `session.html?id=${id}`;
+                }
             });
         });
 
@@ -187,9 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Обработчики модалки меню
+    // ========== ИСПРАВЛЕНО: Редактирование ==========
     if (editSituationBtn) {
-        editSituationBtn.addEventListener('click', () => {
+        editSituationBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (selectedCardId) {
                 window.location.href = `create-edit.html?id=${selectedCardId}`;
             }
@@ -204,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeCardMenu();
                 
                 showConfirm('Вы уверены, что хотите удалить эту ситуацию помощи?', () => {
-                    // Используем Storage.deleteSituation
                     Storage.deleteSituation(cardIdToDelete);
                     currentSituations = Storage.getSituations();
                     renderSituations();
